@@ -1,6 +1,6 @@
 
 <% if logged_in?%>
-	Hello
+	<%= render partial: "projects/dashboard" %>
 <% else %>
     <%= render partial: "form" %>
 <% end %>
