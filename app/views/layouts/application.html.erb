@@ -6,9 +6,42 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
 
-<%= yield %>
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top custom" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+        	<a href="#" class="navbar-brand">Life Manager</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <% if logged_in? %>
+	          <ul class="nav navbar-nav">
+	            
+	          </ul>
+	          <ul class="nav navbar-nav navbar-right">
+	            <li><a href="/about">About</a></li>
+	            <li><%= link_to "Profile", edit_user_path(current_user) %></li>
+	            <li class="active"><%= link_to 'Logout', sessions_path, method: :delete %></li>
+	          </ul>
+          <% end %>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    <!-- end Fixed navbar -->
+
+    <div class="container">
+      <br><br><br><br>
+
+      <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, class: "alert alert-#{name}"%>
+      <% end %>
+
+      <%= yield %>
+
+    </div> <!-- /container -->
+
 
 </body>
 </html>
