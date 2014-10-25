@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
 
 	def index
-        puts "I am in index of sessions"
         @projects = current_user.projects
 	end
 

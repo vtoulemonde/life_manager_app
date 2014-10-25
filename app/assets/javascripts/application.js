@@ -14,4 +14,7 @@
 //= require jquery_ujs
 //= require angular
 //= require bootstrap-sprockets
+//= require angular-drag-and-drop-lists
+//= require lodash
+//= require restangular.min
 //= require_tree .

@@ -11,33 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141024204042) do
+ActiveRecord::Schema.define(version: 20141025214340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "books", force: true do |t|
-    t.string   "title"
-    t.string   "author"
-    t.float    "price"
-    t.string   "img"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "items", force: true do |t|
-    t.integer  "qty"
-    t.integer  "book_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "items", ["book_id"], name: "index_items_on_book_id", using: :btree
-
   create_table "lists", force: true do |t|
     t.string   "title"
     t.integer  "project_id"
-    t.integer  "order"
+    t.integer  "order_in_project"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -52,6 +34,17 @@ ActiveRecord::Schema.define(version: 20141024204042) do
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+
+  create_table "tasks", force: true do |t|
+    t.string   "title"
+    t.integer  "list_id"
+    t.integer  "order_in_list"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tasks", ["list_id"], name: "index_tasks_on_list_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"

@@ -2,6 +2,10 @@ class ApplicationController < ActionController::Base
   	# Prevent CSRF attacks by raising an exception.
   	# For APIs, you may want to use :null_session instead.
   	protect_from_forgery with: :exception
+  	# Prevent exception when call with ajax/restangular
+  	skip_before_action :verify_authenticity_token do
+	    request.content_type == 'application/json'
+	end
 
 	# This allows us to invoke the current_user() method in views!
 	helper_method :current_user, :logged_in?
