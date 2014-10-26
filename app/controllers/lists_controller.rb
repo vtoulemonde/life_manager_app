@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
 
 	def index
-		lists = current_user.projects[0].lists
+		lists = List.where(project_id: params[:project_id])
 		render json: lists.to_json(include: :tasks)
 	end
 

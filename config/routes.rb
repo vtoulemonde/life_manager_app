@@ -7,10 +7,13 @@ Rails.application.routes.draw do
 
   resources :users
 
-  resources :projects
-  resources :lists
+  resources :projects do
+    resources :lists, only: :index
+  end
+
+  # resources :lists
   resources :tasks, only: :create
-  post 'lists/:id/update_order' => 'lists#update_order'
+  post 'projects/:id/lists/:id/update_order' => 'lists#update_order'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

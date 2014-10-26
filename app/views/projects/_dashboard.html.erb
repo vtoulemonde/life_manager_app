@@ -1,7 +1,5 @@
-
-<div ng-app="projectApp" ng-controller="ProjectController">
-
-	<h1></h1>
+<div>
+	<h1>{{project_display.title}}</h1>
 
 	<div class="simpleDemo row">
 
@@ -24,9 +22,7 @@
 						    <li ng-repeat="task in list.tasks"
 						        dnd-draggable="task"
 						        dnd-moved="moveTask(task, list, $index)"
-						        dnd-effect-allowed="move"
-						        dnd-selected="selected = task"
-						        ng-class="{'selected': selected === task}"
+						        dnd-effect-allowed="move" 
 						        >
 						        {{task.title}}
 						    </li>

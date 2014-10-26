@@ -1,9 +1,9 @@
 class SessionsController < ApplicationController
 
 	def index
-        if current_user
-            @projects = current_user.projects
-        end
+        # if current_user
+        #     @projects = current_user.projects
+        # end
 	end
 
     def create

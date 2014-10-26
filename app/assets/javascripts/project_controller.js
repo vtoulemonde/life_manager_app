@@ -2,16 +2,23 @@ var projectApp = angular.module("projectApp", ["dndLists", "restangular"]);
 
 projectApp.controller("ProjectController", ["$scope","Restangular", function($scope, Restangular) {
 
-    $scope.showForm = undefined;
-    // $scope.newTaskTitle = "";
-
-    // var baseProjects = Restangular.all('projects');
+    var baseProject = Restangular.all('projects');
     var baseList = Restangular.all('lists');
     var baseTask = Restangular.all('tasks');
 
-    baseList.getList().then(function(result) { 
-        $scope.allLists = result;
-        $scope.selected = null;
+    $scope.showForm = undefined;
+    $scope.project_display = undefined;
+
+    $scope.selectProject = function(project){
+        $scope.project_display = project;
+        $scope.allLists = $scope.project_display.getList('lists').$object;
+    };
+
+    baseProject.getList().then(function(result) { 
+        if(result.length > 0){
+          $scope.allProjects = result;
+          $scope.selectProject($scope.allProjects[0]);
+        }
     });
 
     $scope.moveTask = function(task, previous_list, previous_index){
@@ -27,7 +34,7 @@ projectApp.controller("ProjectController", ["$scope","Restangular", function($sc
                 }
             }
         }
-        //update order
+        //update order in the previous and next list
         if (previous_list.id !== new_list.id){
             previous_list.customPOST({tasks: previous_list.tasks}, "update_order", {}, {});
         }
@@ -39,7 +46,6 @@ projectApp.controller("ProjectController", ["$scope","Restangular", function($sc
     };
 
     $scope.createNewTask = function(list){
-        // console.dir(list.tasks[list.length-1]);
         if(list.newTaskTitle !==''){
             var newTask = { title: list.newTaskTitle, 
                             list_id: list.id, 

@@ -8,7 +8,7 @@
 
 </head>
 
-<body>
+<body ng-app="projectApp" ng-controller="ProjectController">
 
     <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top custom" role="navigation">
@@ -19,7 +19,16 @@
         <div class="navbar-collapse collapse">
           <% if logged_in? %>
 	          <ul class="nav navbar-nav">
-	            
+	            <li class="dropdown">
+                  
+                  <a href="#" class="dropdown-toggle glyphicon glyphicon-align-justify" data-toggle="dropdown">
+                  Projects
+                  <span class="caret "></span>
+                  </a>
+              <ul class="dropdown-menu" role="menu">
+                <li ng-repeat="project in allProjects"><a ng-click="selectProject(project)">{{project.title}}</a></li>
+              </ul>
+            </li>
 	          </ul>
 	          <ul class="nav navbar-nav navbar-right">
 	            <li><a href="/about">About</a></li>
@@ -33,7 +42,7 @@
     <!-- end Fixed navbar -->
 
     <div class="container">
-      <br><br><br><br>
+      <br><br>
 
       <% flash.each do |name, msg| %>
           <%= content_tag :div, msg, class: "alert alert-#{name}"%>
