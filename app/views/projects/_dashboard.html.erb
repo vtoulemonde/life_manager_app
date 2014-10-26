@@ -1,6 +1,7 @@
-<h1><%= @projects[0].title%></h1>
 
 <div ng-app="projectApp" ng-controller="ProjectController">
+
+	<h1></h1>
 
 	<div class="simpleDemo row">
 
@@ -29,8 +30,18 @@
 						        >
 						        {{task.title}}
 						    </li>
+						    <li ng-show="showForm === list.id">
+						    	<form ng-submit="createNewTask(list)">
+							        <div class="input-group">
+									  <input type="text" class="form-control" ng-model="list.newTaskTitle">
+									  <span class="input-group-btn">
+								        <button class="btn btn-default">Add</button>
+								      </span>
+									</div>
+							    </form>
+						    </li>
 						</ul>
-
+						<span ng-click="addTask(list)" class="glyphicon glyphicon-plus"></span>
                     </div>
                 </div>
             </div>

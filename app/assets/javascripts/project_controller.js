@@ -2,8 +2,12 @@ var projectApp = angular.module("projectApp", ["dndLists", "restangular"]);
 
 projectApp.controller("ProjectController", ["$scope","Restangular", function($scope, Restangular) {
 
+    $scope.showForm = undefined;
+    // $scope.newTaskTitle = "";
+
     // var baseProjects = Restangular.all('projects');
     var baseList = Restangular.all('lists');
+    var baseTask = Restangular.all('tasks');
 
     baseList.getList().then(function(result) { 
         $scope.allLists = result;
@@ -28,6 +32,28 @@ projectApp.controller("ProjectController", ["$scope","Restangular", function($sc
             previous_list.customPOST({tasks: previous_list.tasks}, "update_order", {}, {});
         }
         new_list.customPOST({tasks: new_list.tasks}, "update_order", {}, {});
+    };
+
+    $scope.addTask = function(list){
+        $scope.showForm = list.id;
+    };
+
+    $scope.createNewTask = function(list){
+        // console.dir(list.tasks[list.length-1]);
+        if(list.newTaskTitle !==''){
+            var newTask = { title: list.newTaskTitle, 
+                            list_id: list.id, 
+                            order_in_list: list.tasks[list.tasks.length-1].order_in_list+1
+                        }
+            baseTask.post(newTask).then(function(result) {
+                list.tasks.push(result);
+                $scope.showForm = undefined;
+                list.newTaskTitle = "";
+            });
+        } else {
+            $scope.showForm = undefined;
+            list.newTaskTitle = "";
+        }
     };
 
 
