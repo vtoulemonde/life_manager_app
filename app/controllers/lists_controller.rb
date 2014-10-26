@@ -16,4 +16,18 @@ class ListsController < ApplicationController
 		render json: {}
 	end
 
+	def create
+		list = List.new list_params
+		if list.save
+			render json: list
+		else
+			render json: {}
+		end
+	end
+
+	private
+
+	def list_params
+		params.require(:list).permit(:title, :project_id, :order_in_project)
+	end
 end

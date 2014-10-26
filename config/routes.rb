@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :lists, only: :index
   end
 
-  # resources :lists
+  resources :lists, only: :create
   resources :tasks, only: :create
   post 'projects/:id/lists/:id/update_order' => 'lists#update_order'
 

@@ -1,5 +1,7 @@
 <div>
-	<h1>{{project_display.title}}</h1>
+	<h1>{{project_display.title}} <a ng-click="addList()" class="glyphicon glyphicon-plus"></a></h1>
+
+	
 
 	<div class="simpleDemo row">
 
@@ -29,7 +31,7 @@
 						    <li ng-show="showForm === list.id">
 						    	<form ng-submit="createNewTask(list)">
 							        <div class="input-group">
-									  <input type="text" class="form-control" ng-model="list.newTaskTitle">
+									  <input type="text" class="form-control" ng-model="list.newTaskTitle" placeholder="New task...">
 									  <span class="input-group-btn">
 								        <button class="btn btn-default">Add</button>
 								      </span>
@@ -38,6 +40,23 @@
 						    </li>
 						</ul>
 						<span ng-click="addTask(list)" class="glyphicon glyphicon-plus"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" ng-show="showFormNewList">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <form ng-submit="createNewList()">
+					        <!-- <div class="input-group"> -->
+							  <input type="text" class="form-control" ng-model="newList" placeholder="New list">
+							  <!-- <span class="input-group-btn"> -->
+						        <button class="btn btn-default btn-sm">Add</button>
+						        <span ng-click="cancelAddList()" class="glyphicon glyphicon-remove"></span>
+						      <!-- </span> -->
+							<!-- </div> -->
+					    </form>
+                    </div>
+                    <div class="panel-body">
                     </div>
                 </div>
             </div>

@@ -7,7 +7,10 @@ projectApp.controller("ProjectController", ["$scope","Restangular", function($sc
     var baseTask = Restangular.all('tasks');
 
     $scope.showForm = undefined;
+    $scope.showFormNewList = undefined;
     $scope.project_display = undefined;
+    $scope.newList = "";
+    $scope.allList = [];
 
     $scope.selectProject = function(project){
         $scope.project_display = project;
@@ -46,20 +49,49 @@ projectApp.controller("ProjectController", ["$scope","Restangular", function($sc
     };
 
     $scope.createNewTask = function(list){
-        if(list.newTaskTitle !==''){
+        if(list.newTaskTitle !==""){
+            var order=1;
+            if (list.tasks.length >0){
+                order = list.tasks[list.tasks.length-1].order_in_list+1
+            }
             var newTask = { title: list.newTaskTitle, 
                             list_id: list.id, 
-                            order_in_list: list.tasks[list.tasks.length-1].order_in_list+1
+                            order_in_list: order
                         }
             baseTask.post(newTask).then(function(result) {
                 list.tasks.push(result);
-                $scope.showForm = undefined;
-                list.newTaskTitle = "";
             });
-        } else {
-            $scope.showForm = undefined;
-            list.newTaskTitle = "";
         }
+        $scope.showForm = undefined;
+        list.newTaskTitle = "";
+    };
+
+    $scope.addList = function(){
+        $scope.showFormNewList = true;
+    };
+
+    $scope.createNewList = function(){
+        if ($scope.newList !== ""){
+            var order=1;
+            if ($scope.allLists.length >0){
+                order = $scope.allLists[$scope.allLists.length-1].order_in_project+1
+            }
+            var myNewList = {  title: $scope.newList, 
+                            project_id: $scope.project_display.id,
+                            order_in_project: order
+                        };
+            baseList.post(myNewList).then(function(result) {
+                result.tasks = [];
+                $scope.allLists.push(result);
+            });
+        }
+        $scope.showFormNewList = false;
+        $scope.newList = "";
+    };
+
+    $scope.cancelAddList = function(){
+        $scope.newList = "";
+        $scope.showFormNewList = false;
     };
 
 
