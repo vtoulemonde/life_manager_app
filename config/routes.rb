@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :lists, only: :create
-  resources :tasks, only: :create
+  resources :tasks
   post 'projects/:id/lists/:id/update_order' => 'lists#update_order'
 
   # The priority is based upon order of creation: first created -> highest priority.

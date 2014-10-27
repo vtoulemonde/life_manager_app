@@ -1,7 +1,9 @@
 <div>
-	<h1>{{project_display.title}} <a ng-click="addList()" class="glyphicon glyphicon-plus"></a></h1>
-
-	
+	<h1>{{project_display.title}} 
+		<button ng-click="addList()" type="button" class="btn btn-default">
+		  	<span class="glyphicon glyphicon-plus"></span>
+		</button>
+	</h1>
 
 	<div class="simpleDemo row">
 
@@ -10,13 +12,19 @@
             <div ng-repeat="list in allLists" class="col-md-3">
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h3 class="panel-title">{{list.title}}</h3>
+                        <h3 class="panel-title">{{list.title}}
+	                        <div class="btn-group pull-right">
+							  <button ng-click="addTask(list)" type="button" class="btn btn-default btn-xs">
+							  	<span class="glyphicon glyphicon-plus"></span>
+							  </button>
+							</div>
+						</h3>
                     </div>
                     <div class="panel-body">
 
 						<!-- The dnd-list directive allows to drop elements into it.
 						     The dropped data will be added to the referenced list -->
-						<ul dnd-list="list.tasks">
+						<ul dnd-list="list.tasks" class="list-group">
 						    <!-- The dnd-draggable directive makes an element draggable and will
 						         transfer the object that was assigned to it. If an element was
 						         dragged away, you have to remove it from the original list
@@ -25,8 +33,29 @@
 						        dnd-draggable="task"
 						        dnd-moved="moveTask(task, list, $index)"
 						        dnd-effect-allowed="move" 
+						        class="list-group-item"
 						        >
 						        {{task.title}}
+							    <div class="btn-group pull-right">
+								  <button ng-click="" type="button" class="btn btn-default btn-xs">
+								  	<span class="glyphicon glyphicon-pencil"></span>
+								  </button>
+								  <button ng-click="deleteTask(task, list, $index)" type="button" class="btn btn-default btn-xs">
+								  	<span class="glyphicon glyphicon-remove"></span>
+								  </button>
+								</div>
+						        <!-- <div class="dropdown ">
+								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu{{task.id}}" data-toggle="dropdown">
+								    <span class="glyphicon glyphicon-pencil"></span>
+								  </button>
+								  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu{{task.id}}">
+								    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+								    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+								    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+								    <li role="presentation" class="divider"></li>
+								    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+								  </ul>
+								</div> -->
 						    </li>
 						    <li ng-show="showForm === list.id">
 						    	<form ng-submit="createNewTask(list)">
@@ -39,7 +68,11 @@
 							    </form>
 						    </li>
 						</ul>
-						<span ng-click="addTask(list)" class="glyphicon glyphicon-plus"></span>
+						<div class="btn-group pull-right">
+						  <button ng-click="addTask(list)" type="button" class="btn btn-default btn-xs">
+						  	<span class="glyphicon glyphicon-plus"></span>
+						  </button>
+						</div>
                     </div>
                 </div>
             </div>
