@@ -9,9 +9,11 @@ Rails.application.routes.draw do
 
   resources :projects do
     resources :lists, only: :index
+    resources :members, only: :index
   end
 
   resources :lists, only: [:create, :destroy]
+  resources :members, only: [:create, :destroy]
   resources :tasks
   post 'projects/:id/lists/:id/update_order' => 'lists#update_order'
   post 'lists/:id/update_order' => 'lists#update_order'

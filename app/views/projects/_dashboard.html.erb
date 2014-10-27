@@ -6,6 +6,10 @@
 		<button ng-click="openEditProject('sm')" type="button" class="btn btn-default">
 		  	<span class="glyphicon glyphicon-pencil"></span>
 		</button>
+		<button ng-click="openAddMember('sm')" type="button" class="btn btn-default">
+		  	<span class="glyphicon glyphicon-user"></span>
+		</button>
+		 <%= render partial: "/projects/add_member_modal" %>
 		<button ng-confirm-click="Are you sure you want to delete project? All lists and tasks of the project will be deleted." 
 				ng-click="deleteProject()" 
 				type="button" 
@@ -13,7 +17,6 @@
 		  	<span class="glyphicon glyphicon-remove"></span>
 		</button>
 	</h1>
-
 	<div class="simpleDemo row">
 
     <div class="col-md-12" >
@@ -61,18 +64,6 @@
 								  	<span class="glyphicon glyphicon-remove"></span>
 								  </button>
 								</div>
-						        <!-- <div class="dropdown ">
-								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu{{task.id}}" data-toggle="dropdown">
-								    <span class="glyphicon glyphicon-pencil"></span>
-								  </button>
-								  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu{{task.id}}">
-								    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-								    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-								    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-								    <li role="presentation" class="divider"></li>
-								    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-								  </ul>
-								</div> -->
 						    </li>
 						    <li ng-show="showForm === list.id">
 						    	<form ng-submit="createNewTask(list)">
@@ -97,13 +88,9 @@
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <form ng-submit="createNewList()">
-					        <!-- <div class="input-group"> -->
-							  <input type="text" class="form-control" ng-model="newList" placeholder="New list">
-							  <!-- <span class="input-group-btn"> -->
-						        <button class="btn btn-default btn-sm">Add</button>
-						        <span ng-click="cancelAddList()" class="glyphicon glyphicon-remove"></span>
-						      <!-- </span> -->
-							<!-- </div> -->
+					        <input type="text" class="form-control" ng-model="newList" placeholder="New list">
+							<button class="btn btn-default btn-sm">Add</button>
+						    <span ng-click="cancelAddList()" class="glyphicon glyphicon-remove"></span>
 					    </form>
                     </div>
                     <div class="panel-body">

@@ -13,6 +13,11 @@ class ProjectsController < ApplicationController
 		project = Project.new project_params
 		project.user_id = current_user.id
 		if project.save
+			# Create a default member with the current user
+			member = Member.new
+			member.user_id = current_user.id
+			member.project_id = project.id
+			member.save
 			render json: project
 		else
 			render json: {}
