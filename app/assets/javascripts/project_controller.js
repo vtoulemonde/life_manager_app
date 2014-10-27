@@ -1,4 +1,4 @@
-var projectApp = angular.module("projectApp", ["dndLists", "restangular"]);
+var projectApp = angular.module("projectApp", ["dndLists", "restangular", 'ui.bootstrap']);
 
 projectApp.config(function(RestangularProvider) {
     RestangularProvider.setRequestInterceptor(function(elem, operation) {
@@ -13,9 +13,7 @@ projectApp.controller("ProjectController", ["$scope","Restangular", function($sc
 
     var baseProject = Restangular.all('projects');
     var baseList = Restangular.all('lists');
-    var baseTask = Restangular.all('tasks');
 
-    $scope.showForm = undefined;
     $scope.showFormNewList = undefined;
     $scope.project_display = undefined;
     $scope.newList = "";
@@ -52,35 +50,6 @@ projectApp.controller("ProjectController", ["$scope","Restangular", function($sc
         }
         new_list.customPOST({tasks: new_list.tasks}, "update_order", {}, {});
     };
-
-    $scope.addTask = function(list){
-        $scope.showForm = list.id;
-    };
-
-    $scope.createNewTask = function(list){
-        if(list.newTaskTitle !=="" && list.newTaskTitle !== undefined){
-            var order=1;
-            if (list.tasks.length >0){
-                order = list.tasks[list.tasks.length-1].order_in_list+1
-            }
-            var newTask = { title: list.newTaskTitle, 
-                            list_id: list.id, 
-                            order_in_list: order
-                        }
-            baseTask.post(newTask).then(function(result) {
-                list.tasks.push(result);
-            });
-        }
-        $scope.showForm = undefined;
-        list.newTaskTitle = "";
-    };
-
-    $scope.deleteTask = function(task, list, index){
-        Restangular.one('tasks', task.id).remove().then(function(result){
-            list.tasks.splice(index, 1);
-            list.customPOST({tasks: list.tasks}, "update_order", {}, {});
-        });
-    }
 
     $scope.addList = function(){
         $scope.showFormNewList = true;

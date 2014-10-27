@@ -17,4 +17,5 @@
 //= require angular-drag-and-drop-lists
 //= require lodash
 //= require restangular.min
+//= require ui-bootstrap-tpls-0.11.2
 //= require_tree .
