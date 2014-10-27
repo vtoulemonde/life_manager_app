@@ -16,10 +16,10 @@ end
 list2 = List.create(title: 'Doing', project_id: project.id, order_in_project: 2)
 
 4.times do |i|
-	Task.create(title: "Task #{i} #{list2.title}" , list_id: list2.id, order_in_list: i)
+	Task.create(title: "Task #{i} #{list2.title}" , list_id: list2.id, order_in_list: i+1)
 end
 list3= List.create(title: 'Done', project_id: project.id, order_in_project: 3)
 
 6.times do |i|
-	Task.create(title: "Task #{i} #{list3.title}" , list_id: list3.id, order_in_list: i)
+	Task.create(title: "Task #{i} #{list3.title}" , list_id: list3.id, order_in_list: i+1)
 end

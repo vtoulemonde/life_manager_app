@@ -28,6 +28,7 @@
                     <li ng-repeat="project in allProjects"><a ng-click="selectProject(project)">{{project.title}}</a></li>
                   </ul>
               </li>
+              <li><a href="#" ng-click="openEditProject('sm')">New Project</a></li>
               <%= render partial: "/projects/form_modal" %>
 	          </ul>
 	          <ul class="nav navbar-nav navbar-right">

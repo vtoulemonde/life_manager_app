@@ -1,83 +1,70 @@
-var projectApp = angular.module("projectApp", ["dndLists", "restangular", 'ui.bootstrap']);
 
-projectApp.config(function(RestangularProvider) {
-    RestangularProvider.setRequestInterceptor(function(elem, operation) {
-        if (operation === "remove") {
-            return undefined;
-        } 
-        return elem;
-    });
-});
+projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", function($scope, Restangular, $modal) {
 
-projectApp.controller("ProjectController", ["$scope","Restangular", function($scope, Restangular) {
-
-    var baseProject = Restangular.all('projects');
-    var baseList = Restangular.all('lists');
-
-    $scope.showFormNewList = undefined;
     $scope.project_display = undefined;
-    $scope.newList = "";
     $scope.allList = [];
+    $scope.newProject = {title: ""};
 
     $scope.selectProject = function(project){
         $scope.project_display = project;
         $scope.allLists = $scope.project_display.getList('lists').$object;
     };
 
-    baseProject.getList().then(function(result) { 
+    Restangular.all('projects').getList().then(function(result) { 
         if(result.length > 0){
           $scope.allProjects = result;
           $scope.selectProject($scope.allProjects[0]);
         }
     });
 
-    $scope.moveTask = function(task, previous_list, previous_index){
-        previous_list.tasks.splice(previous_index, 1);
-        var new_list, new_index;
-        
-        for(var i= 0; i< $scope.allLists.length; i++){
-            for(var j= 0; j< $scope.allLists[i].tasks.length; j++){
-                if($scope.allLists[i].tasks[j].id === task.id){
-                    new_index = j;
-                    new_list = $scope.allLists[i];
-                    $scope.allLists[i].tasks[j].list_id = new_list.id;
-                }
+    $scope.deleteProject = function(){
+        Restangular.one('projects', $scope.project_display.id).remove().then(function(result){
+            $scope.allProjects.splice($scope.allProjects.indexOf($scope.project_display), 1);
+            if ($scope.allProjects.length > 0){
+                $scope.selectProject($scope.allProjects[0]);
+            } else {
+                $scope.project_display = undefined;
+                $scope.allLists = [];
+            } 
+        });
+    };
+  
+    $scope.openEditProject = function (size) {
+        $scope.newProject = {title: ""};
+
+        var modalInstance = $modal.open({
+          templateUrl: 'myModalContent.html',
+          // templateUrl: 'projects/form_modal.html.erb',
+          controller: 'ModalInstanceCtrl',
+          size: size,
+          resolve: {
+            project: function () {
+              return $scope.newProject;
             }
-        }
-        //update order in the previous and next list
-        if (previous_list.id !== new_list.id){
-            previous_list.customPOST({tasks: previous_list.tasks}, "update_order", {}, {});
-        }
-        new_list.customPOST({tasks: new_list.tasks}, "update_order", {}, {});
-    };
+          }
+        });
 
-    $scope.addList = function(){
-        $scope.showFormNewList = true;
-    };
+        modalInstance.result.then(function (newProject) {
+            Restangular.all('projects').post(newProject).then(function(result) {
+                    $scope.allProjects.push(result);
+                    $scope.selectProject(result);
+                });
+        }, function () {
 
-    $scope.createNewList = function(){
-        if ($scope.newList !== ""){
-            var order=1;
-            if ($scope.allLists.length >0){
-                order = $scope.allLists[$scope.allLists.length-1].order_in_project+1
-            }
-            var myNewList = {  title: $scope.newList, 
-                            project_id: $scope.project_display.id,
-                            order_in_project: order
-                        };
-            baseList.post(myNewList).then(function(result) {
-                result.tasks = [];
-                $scope.allLists.push(result);
-            });
-        }
-        $scope.showFormNewList = false;
-        $scope.newList = "";
+        });
     };
-
-    $scope.cancelAddList = function(){
-        $scope.newList = "";
-        $scope.showFormNewList = false;
-    };
-
 
 }]);
+
+projectApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, project) {
+
+  $scope.newProject = project;
+
+  $scope.ok = function () {
+    $modalInstance.close($scope.newProject);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+});

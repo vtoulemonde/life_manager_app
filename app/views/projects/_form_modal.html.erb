@@ -1,16 +1,13 @@
-<li ng-controller="ModalDemoCtrl">
-    <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">New project</h3>
-        </div>
-        <div class="modal-body">
-        	<input type="text" class="form-control" ng-model="newProject.title" placeholder="Title">
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-default" ng-click="ok()">Save</button>
-            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
 
-    <a href="#" ng-click="open('sm')">New Project</a>
-</li>
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">New project</h3>
+    </div>
+    <div class="modal-body">
+    	<input type="text" class="form-control" ng-model="newProject.title" placeholder="Title">
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="ok()">Save</button>
+        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

@@ -1,22 +1,39 @@
-<div>
+<div ng-show="project_display !== undefined" ng-controller="ListController">
 	<h1>{{project_display.title}} 
 		<button ng-click="addList()" type="button" class="btn btn-default">
-		  	<span class="glyphicon glyphicon-plus"></span>
+		  	<span class="glyphicon glyphicon-plus"></span> Add list
+		</button>
+		<button ng-click="editProject()" type="button" class="btn btn-default">
+		  	<span class="glyphicon glyphicon-pencil"></span>
+		</button>
+		<button ng-confirm-click="Are you sure you want to delete project? All lists and tasks of the project will be deleted." 
+				ng-click="deleteProject()" 
+				type="button" 
+				class="btn btn-default">
+		  	<span class="glyphicon glyphicon-remove"></span>
 		</button>
 	</h1>
 
 	<div class="simpleDemo row">
 
-    <div class="col-md-12">
-        <div class="row">
-            <div ng-repeat="list in allLists" class="col-md-3">
-                <div class="panel panel-info" ng-controller="TaskController">
+    <div class="col-md-12" >
+        <div class="row" >
+            <div ng-repeat="list in allLists" class="col-md-3" ng-controller="TaskController">
+                <div class="panel panel-info" >
                     <div class="panel-heading">
                         <h3 class="panel-title">{{list.title}}
-	                        <div class="btn-group pull-right">
+	                        <!-- <div class="btn-group pull-right">
 							  <button ng-click="addTask(list)" type="button" class="btn btn-default btn-xs">
 							  	<span class="glyphicon glyphicon-plus"></span>
 							  </button>
+							</div> -->
+							<div class="btn-group pull-right">
+								<button  ng-confirm-click="Are you sure you want to delete that list? All tasks will be deleted."
+							  			ng-click="deleteList(list)" 
+							  			type="button" 
+							  			class="btn btn-default btn-xs">
+							  		<span class="glyphicon glyphicon-remove"></span>
+								</button>
 							</div>
 						</h3>
                     </div>
@@ -70,7 +87,7 @@
 						</ul>
 						<div class="btn-group pull-right">
 						  <button ng-click="addTask(list)" type="button" class="btn btn-default btn-xs">
-						  	<span class="glyphicon glyphicon-plus"></span>
+						  	<span class="glyphicon glyphicon-plus"></span> Add task
 						  </button>
 						</div>
                     </div>

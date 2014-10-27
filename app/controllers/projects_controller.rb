@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
 			projects = current_user.projects
 			render json: projects
 		else 
-			render json: {}
+			render json: []
 		end
 	end
 
@@ -17,6 +17,12 @@ class ProjectsController < ApplicationController
 		else
 			render json: {}
 		end
+	end
+
+	def destroy
+		project = Project.find params[:id]
+		project.destroy
+		render json: {}
 	end
 
 	private

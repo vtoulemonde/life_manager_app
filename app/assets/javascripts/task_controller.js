@@ -1,4 +1,5 @@
 projectApp.controller("TaskController", ["$scope","Restangular", function($scope, Restangular) {
+    
     var baseTask = Restangular.all('tasks');
     $scope.showForm = undefined;
 
@@ -29,5 +30,25 @@ projectApp.controller("TaskController", ["$scope","Restangular", function($scope
             list.tasks.splice(index, 1);
             list.customPOST({tasks: list.tasks}, "update_order", {}, {});
         });
+    };
+
+    $scope.moveTask = function(task, previous_list, previous_index){
+        previous_list.tasks.splice(previous_index, 1);
+        var new_list, new_index;
+        
+        for(var i= 0; i< $scope.allLists.length; i++){
+            for(var j= 0; j< $scope.allLists[i].tasks.length; j++){
+                if($scope.allLists[i].tasks[j].id === task.id){
+                    new_index = j;
+                    new_list = $scope.allLists[i];
+                    $scope.allLists[i].tasks[j].list_id = new_list.id;
+                }
+            }
+        }
+        //update order in the previous and next list
+        if (previous_list.id !== new_list.id){
+            previous_list.customPOST({tasks: previous_list.tasks}, "update_order", {}, {});
+        }
+        new_list.customPOST({tasks: new_list.tasks}, "update_order", {}, {});
     };
 }]);
