@@ -19,6 +19,15 @@ class ProjectsController < ApplicationController
 		end
 	end
 
+	def update
+		project = Project.find params[:id]
+		if project.update project_params
+			render json: project
+		else
+			render json: {}
+		end
+	end
+
 	def destroy
 		project = Project.find params[:id]
 		project.destroy

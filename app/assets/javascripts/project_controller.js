@@ -29,8 +29,8 @@ projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", fu
         });
     };
   
-    $scope.openEditProject = function (size) {
-        $scope.newProject = {title: ""};
+    $scope.openNewProject = function (size) {
+        $scope.editProject = {title: ""};
 
         var modalInstance = $modal.open({
           templateUrl: 'myModalContent.html',
@@ -39,29 +39,57 @@ projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", fu
           size: size,
           resolve: {
             project: function () {
-              return $scope.newProject;
+              return $scope.editProject;
             }
           }
         });
 
         modalInstance.result.then(function (newProject) {
             Restangular.all('projects').post(newProject).then(function(result) {
-                    $scope.allProjects.push(result);
+                    $scope.allProjects.unshift(result);
                     $scope.selectProject(result);
                 });
         }, function () {
-
+            //Do nothing when cancel
         });
     };
 
+    $scope.openEditProject = function (size) {
+
+        var modalInstance = $modal.open({
+          templateUrl: 'myModalContent.html',
+          // templateUrl: 'projects/form_modal.html.erb',
+          controller: 'ModalInstanceCtrl',
+          size: size,
+          resolve: {
+            project: function () {
+              return Restangular.copy($scope.project_display);
+            }
+          }
+        });
+
+        modalInstance.result.then(
+            function (editProject) { 
+                editProject.put().then(
+                function(result) {
+                    $scope.allProjects.splice($scope.allProjects.indexOf($scope.project_display), 1);
+                    $scope.project_display = result;
+                    $scope.allProjects.unshift(result);
+                });
+            }, function () {
+                //Do nothing when cancel
+            }
+        );
+    };
 }]);
 
 projectApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, project) {
 
-  $scope.newProject = project;
+  // $scope.newProject = project;
+  $scope.editProject = project
 
   $scope.ok = function () {
-    $modalInstance.close($scope.newProject);
+    $modalInstance.close($scope.editProject);
   };
 
   $scope.cancel = function () {
