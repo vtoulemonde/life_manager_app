@@ -12,6 +12,22 @@
             <label>Description</label>
            <textarea class="form-control" ng-model="editTask.description" rows="3">{{editTask.description}}</textarea>
         </div>
+        <div class="form-group">
+            <label>Status</label>
+            <label class="radio-inline" ng-repeat="status in statusList">
+                <input type="radio" name="statusRadioOptions" ng-model="editTask.status" value="{{status}}"> {{status}}
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Affected to</label>
+            <select ng-model="editTask.user_id" 
+                    ng-options="member.user.id as member.user.username for member in allMembers" 
+                    class="form-control">
+                <option value="">-- Not affected --</option>
+            </select>
+        </div>
+
+
     </div>
     <div class="modal-footer">
         <button class="btn btn-default" ng-click="ok()">Save</button>

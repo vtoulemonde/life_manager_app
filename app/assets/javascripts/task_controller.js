@@ -2,6 +2,7 @@ projectApp.controller("TaskController", ["$scope","Restangular", "$modal", funct
     
     var baseTask = Restangular.all('tasks');
     $scope.showForm = undefined;
+    $scope.statusList = ['New', 'To start', 'In progress', 'Pending', 'Done'];
 
     $scope.addTask = function(list){
         $scope.showForm = list.id;
@@ -53,14 +54,17 @@ projectApp.controller("TaskController", ["$scope","Restangular", "$modal", funct
     };
 
     $scope.openEditTask = function (task, list, index) {
+        $scope.editTask = Restangular.copy(task);
+
         var modalInstance = $modal.open({
           templateUrl: 'myModalEditTask.html',
           controller: 'ModalEditTaskCtrl',
-          resolve: {
-            task: function () {
-              return Restangular.copy(task);
-            }
-          }
+          scope: $scope
+          // resolve: {
+          //   task: function () {
+          //     return Restangular.copy(task);
+          //   }
+          // }
         });
 
         modalInstance.result.then(function (editTask) { 
@@ -76,9 +80,9 @@ projectApp.controller("TaskController", ["$scope","Restangular", "$modal", funct
 }]);
 
 
-projectApp.controller('ModalEditTaskCtrl', function ($scope, $modalInstance, task) {
+projectApp.controller('ModalEditTaskCtrl', function ($scope, $modalInstance) {
 
-  $scope.editTask = task;
+  
 
   $scope.ok = function () {
     $modalInstance.close($scope.editTask);
