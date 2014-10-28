@@ -16,7 +16,8 @@ projectApp.controller("TaskController", ["$scope","Restangular", "$modal", funct
             }
             var newTask = { title: list.newTaskTitle, 
                             list_id: list.id, 
-                            order_in_list: order
+                            order_in_list: order,
+                            status: $scope.statusList[0]
                         }
             baseTask.post(newTask).then(function(result) {
                 list.tasks.push(result);
