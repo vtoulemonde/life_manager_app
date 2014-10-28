@@ -16,7 +16,7 @@
 					ng-init="task.detail = false" 
 					ng-click="task.detail = !task.detail">
 						{{task.title}}
-						<div ng-show="task.detail">
+						<div ng-show="task.detail" class="text-info">
 							<small><em>{{task.status}}</em></small><br>
 							<small><em>{{task.description}}</em></small>
 						</div>

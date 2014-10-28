@@ -11,15 +11,11 @@
 			</div>
 		</h3>
     </div>
-    <div class="panel-body">
+    <!-- <div class="panel-body"> -->
 
 		<!-- The dnd-list directive allows to drop elements into it.
 		     The dropped data will be added to the referenced list -->
 		<ul dnd-list="list.tasks" class="list-group">
-		    <!-- The dnd-draggable directive makes an element draggable and will
-		         transfer the object that was assigned to it. If an element was
-		         dragged away, you have to remove it from the original list
-		         yourself using the dnd-moved attribute -->
 		    <li ng-repeat="task in list.tasks | filter:{status:filterStatus, user_id:filterMember, title:searchTask}:false"
 		        dnd-draggable="task"
 		        dnd-moved="moveTask(task, list, $index)"
@@ -36,7 +32,7 @@
 				  </button>
 				</div>
 		    </li>
-		    <li ng-show="showForm === list.id">
+		    <li ng-show="showForm === list.id" class="list-group-item">
 		    	<form ng-submit="createNewTask(list)">
 			        <div class="input-group">
 					  <input type="text" class="form-control" ng-model="list.newTaskTitle" placeholder="New task...">
@@ -46,11 +42,30 @@
 					</div>
 			    </form>
 		    </li>
+		    <li class="list-group-item">&nbsp;
+		    	<div class="btn-group pull-right">
+				  <button ng-click="addTask(list)" type="button" class="btn btn-default btn-xs">
+				  	<span class="glyphicon glyphicon-plus"></span> Add task
+				  </button>
+				</div>
+		    </li>
 		</ul>
-		<div class="btn-group pull-right">
+		<!-- <div class="btn-group pull-right">
 		  <button ng-click="addTask(list)" type="button" class="btn btn-default btn-xs">
 		  	<span class="glyphicon glyphicon-plus"></span> Add task
 		  </button>
-		</div>
-    </div>
+		</div> -->
+    <!-- </div> -->
 </div>
+<!-- <div class="panel panel-info">
+	<div class="panel-heading">
+        <h3 class="panel-title">Titke</h3>
+    </div>
+  <ul class="list-group">
+    <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Morbi leo risus</li>
+    <li class="list-group-item">Porta ac consectetur ac</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+  </ul>
+</div> -->
