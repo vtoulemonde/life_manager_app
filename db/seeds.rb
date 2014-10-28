@@ -6,11 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-project = Project.create(title: 'First project', user_id: 1)
+user_id = 1
+project = Project.create(title: 'First project', user_id: user_id)
+Member.create(user_id: user_id, project_id: project.id)
 
 list1 = List.create(title: 'Backlog', project_id: project.id, order_in_project: 1)
 5.times do |i|
-	Task.create(title: "Task #{i} #{list1.title}" , list_id: list1.id, order_in_list: i)
+	Task.create(title: "Task #{i} #{list1.title}" , list_id: list1.id, order_in_list: i+1)
 end
 
 list2 = List.create(title: 'Doing', project_id: project.id, order_in_project: 2)

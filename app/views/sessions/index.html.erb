@@ -1,6 +1,7 @@
 
 <% if logged_in?%>
-	<%= render partial: "projects/dashboard" %>
+	<div ng-hide="showOverviewPage"><%= render partial: "projects/dashboard" %></div>
+	<div ng-show="showOverviewPage"><%= render partial: "tasks/overview" %></div>
 <% else %>
     <%= render partial: "form" %>
 <% end %>

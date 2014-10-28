@@ -30,6 +30,7 @@
               </li>
               <li><a href="#" ng-click="openNewProject('sm')">New Project</a></li>
               <%= render partial: "/projects/form_modal" %>
+              <li><a href="#" ng-click="displayOverview()">My tasks</a></li>
 	          </ul>
 	          <ul class="nav navbar-nav navbar-right">
 	            <li><a href="/about">About</a></li>
@@ -43,7 +44,7 @@
     <!-- end Fixed navbar -->
 
     <div class="container">
-      <br><br>
+      <br><br><br>
 
       <% flash.each do |name, msg| %>
           <%= content_tag :div, msg, class: "alert alert-#{name}"%>

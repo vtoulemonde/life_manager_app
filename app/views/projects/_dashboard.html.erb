@@ -1,4 +1,4 @@
-<div ng-show="project_display !== undefined" ng-controller="ListController">
+<div ng-show="project_display !== undefined" ng-controller="ListController" >
 	<h1>{{project_display.title}} 
 		<button ng-click="addList()" type="button" class="btn btn-default">
 		  	<span class="glyphicon glyphicon-plus"></span> Add list
@@ -25,8 +25,8 @@
 	
 	<div class="simpleDemo row">
 	    <div class="col-md-12" >
-	        <div class="row" ng-controller="TaskController">
-	            <div class="col-md-3" ng-repeat="list in allLists">
+	        <div class="row" >
+	            <div class="col-md-3" ng-repeat="list in allLists" ng-controller="TaskController">
 	                <%= render partial: "/lists/list_tasks" %>
 	            </div>
 	            <div class="col-md-3" ng-show="showFormNewList">

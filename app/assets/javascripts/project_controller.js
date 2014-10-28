@@ -6,8 +6,10 @@ projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", fu
     $scope.allMembers = [];
     $scope.newProject = {title: ""};
     $scope.statusList = ['New', 'To start', 'In progress', 'Pending', 'Done'];
+    $scope.showOverviewPage = false;
 
     $scope.selectProject = function(project){
+        $scope.showOverviewPage = false;
         $scope.project_display = project;
         $scope.allLists = $scope.project_display.getList('lists').$object;
         $scope.allMembers = $scope.project_display.getList('members').$object;
@@ -33,11 +35,11 @@ projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", fu
     };
   
     $scope.openNewProject = function (size) {
+        $scope.showOverviewPage = true;
         $scope.editProject = {title: ""};
 
         var modalInstance = $modal.open({
           templateUrl: 'myModalContent.html',
-          // templateUrl: 'projects/form_modal.html.erb',
           controller: 'ModalEditProjectCtrl',
           size: size,
           resolve: {
@@ -61,7 +63,6 @@ projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", fu
 
         var modalInstance = $modal.open({
           templateUrl: 'myModalContent.html',
-          // templateUrl: 'projects/form_modal.html.erb',
           controller: 'ModalEditProjectCtrl',
           size: size,
           resolve: {
@@ -95,6 +96,13 @@ projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", fu
           scope: $scope
         });
     };
+
+    $scope.displayOverview = function(){
+      Restangular.all('tasks').getList().then(function(result){
+        $scope.projectsOverview = result;
+        $scope.showOverviewPage = true;
+      });
+    }
 
 
 }]);
