@@ -1,4 +1,4 @@
-projectApp.controller("TaskController", ["$scope","Restangular", function($scope, Restangular) {
+projectApp.controller("TaskController", ["$scope","Restangular", "$modal", function($scope, Restangular, $modal) {
     
     var baseTask = Restangular.all('tasks');
     $scope.showForm = undefined;
@@ -51,4 +51,40 @@ projectApp.controller("TaskController", ["$scope","Restangular", function($scope
         }
         new_list.customPOST({tasks: new_list.tasks}, "update_order", {}, {});
     };
+
+    $scope.openEditTask = function (task, list, index) {
+        var modalInstance = $modal.open({
+          templateUrl: 'myModalEditTask.html',
+          controller: 'ModalEditTaskCtrl',
+          resolve: {
+            task: function () {
+              return Restangular.copy(task);
+            }
+          }
+        });
+
+        modalInstance.result.then(function (editTask) { 
+                Restangular.one("tasks", editTask.id).customPUT(editTask, '', {}, {}).then(function(result) {
+                    list.tasks[index] = result;
+                });
+            }, function () {
+                //Do nothing when cancel
+            }
+        );
+    };
+
 }]);
+
+
+projectApp.controller('ModalEditTaskCtrl', function ($scope, $modalInstance, task) {
+
+  $scope.editTask = task;
+
+  $scope.ok = function () {
+    $modalInstance.close($scope.editTask);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+});

@@ -9,7 +9,6 @@
 		<button ng-click="openAddMember('sm')" type="button" class="btn btn-default">
 		  	<span class="glyphicon glyphicon-user"></span>
 		</button>
-		 <%= render partial: "/projects/add_member_modal" %>
 		<button ng-confirm-click="Are you sure you want to delete project? All lists and tasks of the project will be deleted." 
 				ng-click="deleteProject()" 
 				type="button" 
@@ -57,7 +56,7 @@
 						        >
 						        {{task.title}}
 							    <div class="btn-group pull-right">
-								  <button ng-click="" type="button" class="btn btn-default btn-xs">
+								  <button ng-click="openEditTask(task, list, $index)" type="button" class="btn btn-default btn-xs">
 								  	<span class="glyphicon glyphicon-pencil"></span>
 								  </button>
 								  <button ng-click="deleteTask(task, list, $index)" type="button" class="btn btn-default btn-xs">
@@ -102,11 +101,7 @@
     </div>
 
 </div>
-
-
-
-
-
-
+<%= render partial: "/projects/add_member_modal" %>
+<%= render partial: "/tasks/edit_task_modal" %>
 
 </div>

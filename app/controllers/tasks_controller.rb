@@ -15,6 +15,15 @@ class TasksController < ApplicationController
 		render json: {}
 	end
 
+	def update
+		task = Task.find params[:id]
+		if task.update task_params
+			render json: task
+		else
+			render json: {}
+		end
+	end
+
 	private
 
 	def task_params

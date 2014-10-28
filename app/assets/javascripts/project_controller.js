@@ -72,6 +72,7 @@ projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", fu
 
         modalInstance.result.then(
             function (editProject) { 
+                console.dir(editProject);
                 editProject.put().then(
                 function(result) {
                     $scope.allProjects.splice($scope.allProjects.indexOf($scope.project_display), 1);
