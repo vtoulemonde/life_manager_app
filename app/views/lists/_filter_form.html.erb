@@ -1,0 +1,37 @@
+<div class="row well form-inline" ng-show="showFilter">
+  <!-- <div class="col-lg-6"> -->
+	<div class="col-lg-3 form-group">
+		<label>Status : </label>
+		<select ng-model="filterStatus" 
+                ng-options="status for status in statusList" 
+                class="form-control">
+            <option value="">All</option>
+        </select>
+	</div>
+    <div class="col-lg-3 form-group">
+    	<label>Affected to : </label>
+        <select ng-model="filterMember" 
+                ng-options="member.user.id as member.user.username for member in allMembers"
+                class="form-control">
+            <option value="">All</option>
+            <option value="">Not affected</option>
+        </select>
+	</div>
+	<div class="col-lg-4 form-group">
+		<label>Search task : </label>
+    	<div class="input-group">
+	      	<input type="text" class="form-control" ng-model="searchTask">
+	      	<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+	    </div>
+	</div>
+	<div class="col-lg-2">
+		<div class="pull-right">
+			<button ng-click="clearFilter()" type="button" class="btn btn-default">
+			  	Clear
+			</button>
+			<button ng-click="hideFilter()" type="button" class="btn btn-default">
+			  	<span class="glyphicon glyphicon-remove"></span>
+			</button>
+		</div>
+	</div>
+</div>

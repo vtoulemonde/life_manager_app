@@ -2,7 +2,7 @@
 projectApp.controller("ListController", ["$scope","Restangular", function($scope, Restangular) {
 
     $scope.showFormNewList = undefined;
-    $scope.newList = "";
+    $scope.newList = "";    $scope.showFilter = false;
 
     $scope.addList = function(){
         $scope.showFormNewList = true;
@@ -36,6 +36,28 @@ projectApp.controller("ListController", ["$scope","Restangular", function($scope
         Restangular.one('lists', list.id).remove().then(function(result){
             $scope.allLists.splice($scope.allLists.indexOf(list), 1);
         });
+    };
+
+    $scope.toggleDisplayFilter = function(){
+    	if($scope.showFilter){
+			$scope.showFilter = false;
+    	} else {
+    		$scope.showFilter = true;
+    	}
+    };
+
+    $scope.hideFilter = function(){
+        $scope.filterStatus = undefined;
+        $scope.filterMember = undefined;
+        $scope.searchTask = undefined;
+        $scope.showFilter = false;
+    };
+
+    $scope.clearFilter = function(){
+        $scope.filterStatus = undefined;
+        $scope.filterMember = undefined;
+        $scope.searchTask = undefined;
+
     };
 
 }]);

@@ -2,7 +2,7 @@ projectApp.controller("TaskController", ["$scope","Restangular", "$modal", funct
     
     var baseTask = Restangular.all('tasks');
     $scope.showForm = undefined;
-    $scope.statusList = ['New', 'To start', 'In progress', 'Pending', 'Done'];
+    
 
     $scope.addTask = function(list){
         $scope.showForm = list.id;

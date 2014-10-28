@@ -10,7 +10,7 @@
             <button ng-click="removeMember(member)" 
                     type="button" 
                     class="btn btn-default btn-xs pull-right"
-                    ng-hide="member.user.id === <%=current_user.id%>">
+                    ng-hide="member.user.id === project_display.user_id">
                 <span class="glyphicon glyphicon-remove"></span>
             </button>
           </li>

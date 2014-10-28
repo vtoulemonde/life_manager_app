@@ -5,6 +5,7 @@ projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", fu
     $scope.allList = [];
     $scope.allMembers = [];
     $scope.newProject = {title: ""};
+    $scope.statusList = ['New', 'To start', 'In progress', 'Pending', 'Done'];
 
     $scope.selectProject = function(project){
         $scope.project_display = project;
@@ -94,6 +95,8 @@ projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", fu
           scope: $scope
         });
     };
+
+
 }]);
 
 projectApp.controller('ModalEditProjectCtrl', function ($scope, $modalInstance, project) {

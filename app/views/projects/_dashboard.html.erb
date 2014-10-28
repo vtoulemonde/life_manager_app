@@ -3,104 +3,48 @@
 		<button ng-click="addList()" type="button" class="btn btn-default">
 		  	<span class="glyphicon glyphicon-plus"></span> Add list
 		</button>
-		<button ng-click="openEditProject('sm')" type="button" class="btn btn-default">
-		  	<span class="glyphicon glyphicon-pencil"></span>
-		</button>
-		<button ng-click="openAddMember('sm')" type="button" class="btn btn-default">
-		  	<span class="glyphicon glyphicon-user"></span>
-		</button>
-		<button ng-confirm-click="Are you sure you want to delete project? All lists and tasks of the project will be deleted." 
-				ng-click="deleteProject()" 
-				type="button" 
-				class="btn btn-default">
-		  	<span class="glyphicon glyphicon-remove"></span>
-		</button>
+		<div class="btn-group">
+			<button ng-click="openEditProject('sm')" type="button" class="btn btn-default">
+			  	<span class="glyphicon glyphicon-pencil"></span>
+			</button>
+			<button ng-click="openAddMember('sm')" type="button" class="btn btn-default">
+			  	<span class="glyphicon glyphicon-user"></span>
+			</button>
+			<button ng-confirm-click="Are you sure you want to delete project? All lists and tasks of the project will be deleted." 
+					ng-click="deleteProject()" 
+					type="button" 
+					class="btn btn-default">
+			  	<span class="glyphicon glyphicon-remove"></span>
+			</button>
+			<button ng-click="toggleDisplayFilter()" type="button" class="btn btn-default">
+			  	<span class="glyphicon glyphicon-filter"></span>
+			</button>
+		</div>
 	</h1>
+	<%= render partial: "/lists/filter_form" %>
+	
 	<div class="simpleDemo row">
-
-    <div class="col-md-12" >
-        <div class="row" >
-            <div ng-repeat="list in allLists" class="col-md-3" ng-controller="TaskController">
-                <div class="panel panel-info" >
-                    <div class="panel-heading">
-                        <h3 class="panel-title">{{list.title}}
-	                        <!-- <div class="btn-group pull-right">
-							  <button ng-click="addTask(list)" type="button" class="btn btn-default btn-xs">
-							  	<span class="glyphicon glyphicon-plus"></span>
-							  </button>
-							</div> -->
-							<div class="btn-group pull-right">
-								<button  ng-confirm-click="Are you sure you want to delete that list? All tasks will be deleted."
-							  			ng-click="deleteList(list)" 
-							  			type="button" 
-							  			class="btn btn-default btn-xs">
-							  		<span class="glyphicon glyphicon-remove"></span>
-								</button>
-							</div>
-						</h3>
-                    </div>
-                    <div class="panel-body">
-
-						<!-- The dnd-list directive allows to drop elements into it.
-						     The dropped data will be added to the referenced list -->
-						<ul dnd-list="list.tasks" class="list-group">
-						    <!-- The dnd-draggable directive makes an element draggable and will
-						         transfer the object that was assigned to it. If an element was
-						         dragged away, you have to remove it from the original list
-						         yourself using the dnd-moved attribute -->
-						    <li ng-repeat="task in list.tasks"
-						        dnd-draggable="task"
-						        dnd-moved="moveTask(task, list, $index)"
-						        dnd-effect-allowed="move" 
-						        class="list-group-item"
-						        >
-						        {{task.title}}
-							    <div class="btn-group pull-right">
-								  <button ng-click="openEditTask(task, list, $index)" type="button" class="btn btn-default btn-xs">
-								  	<span class="glyphicon glyphicon-pencil"></span>
-								  </button>
-								  <button ng-click="deleteTask(task, list, $index)" type="button" class="btn btn-default btn-xs">
-								  	<span class="glyphicon glyphicon-remove"></span>
-								  </button>
-								</div>
-						    </li>
-						    <li ng-show="showForm === list.id">
-						    	<form ng-submit="createNewTask(list)">
-							        <div class="input-group">
-									  <input type="text" class="form-control" ng-model="list.newTaskTitle" placeholder="New task...">
-									  <span class="input-group-btn">
-								        <button class="btn btn-default">Add</button>
-								      </span>
-									</div>
-							    </form>
-						    </li>
-						</ul>
-						<div class="btn-group pull-right">
-						  <button ng-click="addTask(list)" type="button" class="btn btn-default btn-xs">
-						  	<span class="glyphicon glyphicon-plus"></span> Add task
-						  </button>
-						</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" ng-show="showFormNewList">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <form ng-submit="createNewList()">
-					        <input type="text" class="form-control" ng-model="newList" placeholder="New list">
-							<button class="btn btn-default btn-sm">Add</button>
-						    <span ng-click="cancelAddList()" class="glyphicon glyphicon-remove"></span>
-					    </form>
-                    </div>
-                    <div class="panel-body">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-</div>
+	    <div class="col-md-12" >
+	        <div class="row" ng-controller="TaskController">
+	            <div class="col-md-3" ng-repeat="list in allLists">
+	                <%= render partial: "/lists/list_tasks" %>
+	            </div>
+	            <div class="col-md-3" ng-show="showFormNewList">
+	                <div class="panel panel-info">
+	                    <div class="panel-heading">
+	                        <form ng-submit="createNewList()">
+						        <input type="text" class="form-control" ng-model="newList" placeholder="New list">
+								<button class="btn btn-default btn-sm">Add</button>
+							    <span ng-click="cancelAddList()" class="glyphicon glyphicon-remove"></span>
+						    </form>
+	                    </div>
+	                    <div class="panel-body">
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 <%= render partial: "/projects/add_member_modal" %>
 <%= render partial: "/tasks/edit_task_modal" %>
 
