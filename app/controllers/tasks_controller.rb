@@ -61,9 +61,13 @@ class TasksController < ApplicationController
 		end
 	end
 
+	# def get_all_tags_project
+	# 	# Task.find(params[:project_id])
+	# end
+
 	private
 
 	def task_params
-		params.require(:task).permit(:title, :list_id, :order_in_list, :description, :status, :user_id)
+		params.require(:task).permit(:title, :list_id, :order_in_list, :description, :status, :user_id, :tag)
 	end
 end

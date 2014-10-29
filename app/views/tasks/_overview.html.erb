@@ -20,7 +20,7 @@
 					ng-repeat="task in list.tasks | filter:{status:filterStatus, title:searchTask}:false" 
 					ng-init="task.detail = false" 
 					ng-click="task.detail = !task.detail">
-						{{task.title}}<br>
+						{{task.title}}<span class="badge">{{task.tag}}</span><br>
 						<small class="text-info"><em>{{task.status}}</em></small>
 						<div ng-show="task.detail" class="text-muted">
 							<small><em>Desc: {{task.description}}</em></small>

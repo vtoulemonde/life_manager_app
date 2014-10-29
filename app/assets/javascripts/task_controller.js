@@ -61,11 +61,6 @@ projectApp.controller("TaskController", ["$scope","Restangular", "$modal", funct
           templateUrl: 'myModalEditTask.html',
           controller: 'ModalEditTaskCtrl',
           scope: $scope
-          // resolve: {
-          //   task: function () {
-          //     return Restangular.copy(task);
-          //   }
-          // }
         });
 
         modalInstance.result.then(function (editTask) { 
@@ -77,13 +72,13 @@ projectApp.controller("TaskController", ["$scope","Restangular", "$modal", funct
             }
         );
     };
-
 }]);
 
 
 projectApp.controller('ModalEditTaskCtrl', ["$scope", "$modalInstance", function ($scope, $modalInstance) {
     
   $scope.ok = function () {
+    // console.log(param)
     $modalInstance.close($scope.editTask);
   };
 
