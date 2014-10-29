@@ -4,6 +4,7 @@ projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", fu
     $scope.project_display = undefined;
     $scope.allList = [];
     $scope.allMembers = [];
+    $scope.allProjects = [];
     $scope.newProject = {title: ""};
     $scope.statusList = ['New', 'To start', 'In progress', 'Pending', 'Done'];
     $scope.showOverviewPage = false;
@@ -35,7 +36,7 @@ projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", fu
     };
   
     $scope.openNewProject = function (size) {
-        $scope.showOverviewPage = true;
+        $scope.showOverviewPage = false;
         $scope.editProject = {title: ""};
 
         var modalInstance = $modal.open({
