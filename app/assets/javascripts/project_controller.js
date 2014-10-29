@@ -122,19 +122,38 @@ projectApp.controller('ModalEditProjectCtrl', function ($scope, $modalInstance, 
 
 projectApp.controller('ModalAddMemberCtrl', function ($scope, $modalInstance, Restangular) {
     
-    $scope.users = Restangular.all('users').getList().$object;
+    Restangular.all('users').getList().then(function(result){
+      $scope.users = result;
+      //Init variable is_member on each user
+      for(var i = 0; i< $scope.users.length; i++){
+        $scope.users[i].is_member = false;
+        for(var j = 0; j< $scope.allMembers.length; j++){
+          if($scope.allMembers[j].user_id === $scope.users[i].id){
+            $scope.users[i].is_member = true;
+          }
+        }
+      }
+    });
     $scope.searchText="";
+
 
     $scope.addMember = function(user){
         var newMember = { user_id: user.id, project_id: $scope.project_display.id };
         Restangular.all('members').post(newMember).then(function(result){
-            $scope.allMembers.push(result); 
+            $scope.allMembers.push(result);
+            user.is_member = true; 
         });
     };
 
     $scope.removeMember = function(member){
         Restangular.one('members', member.id).remove().then(function(result){
             $scope.allMembers.splice($scope.allMembers.indexOf(member), 1);
+            //Update is_member on the corresponding user
+            for(var i = 0; i< $scope.users.length; i++){
+              if($scope.users[i].id === member.user_id){
+                  $scope.users[i].is_member = false;
+              }
+            }
         });
     };
 

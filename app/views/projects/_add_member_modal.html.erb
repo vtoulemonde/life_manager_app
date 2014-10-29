@@ -19,11 +19,14 @@
         <h4>Add a member</h4>
         <input type="text" class="form-control" ng-model="searchText" placeholder="Search..."><br>
         <ul class="list-group" ng-show="searchText !== ''">
-          <li class="list-group-item" ng-repeat="user in users | filter:{username:searchText}">
-            {{user.username}}
-            <button ng-click="addMember(user)" type="button" class="btn btn-default btn-xs pull-right">
-                <span class="glyphicon glyphicon-plus"></span>
-            </button>
+          <li class="list-group-item" 
+                ng-repeat="user in users | filter:{username:searchText}"
+                ng-hide="user.is_member" 
+                >
+                    {{user.username}}
+                    <button ng-click="addMember(user)" type="button" class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
 
           </li>
         </ul>
