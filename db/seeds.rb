@@ -1,14 +1,14 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# If you want to create a new project on an other user, just put the email of that user in variable email
+email = "guest@mail.com"
+username = "guest"
 
-user_id = 1
-project = Project.create(title: 'First project', user_id: user_id)
-Member.create(user_id: user_id, project_id: project.id)
+user = User.find_by(email: email)
+if !user
+	user = User.create(username: username, email: email, password: 'password', password_confirmation: 'password')
+end
+
+project = Project.create(title: 'First project', user_id: user.id)
+Member.create(user_id: user.id, project_id: project.id)
 
 list1 = List.create(title: 'Backlog', project_id: project.id, order_in_project: 1)
 5.times do |i|
