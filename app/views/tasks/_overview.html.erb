@@ -13,10 +13,9 @@
 		  	</div>
 
 		  	<!-- Lists and tasks -->
-		  	<div class="list-group" ng-repeat="list in project.lists" ng-show="(list.tasks | filter:filterByGroup(list)).length">
+		  	<div class="list-group" ng-repeat="list in project.lists" ng-if="(list.tasks | filter:{status:filterStatus, title:searchTask, tag:filterTag}).length">
 
 				<a class="list-group-item disabled">{{list.title}}</a>
-
 				<a href="#" 
 					class="list-group-item" 
 					ng-repeat="task in list.tasks | filter:{status:filterStatus, title:searchTask, tag:filterTag}:false" 
