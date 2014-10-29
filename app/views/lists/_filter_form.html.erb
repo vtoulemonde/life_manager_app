@@ -1,6 +1,6 @@
 <div class="row well form-inline" ng-show="showFilter">
   <!-- <div class="col-lg-6"> -->
-	<div class="col-lg-3 form-group">
+	<!-- <div class="col-lg-4 form-group"> -->
 		<label>Status : </label>
 		<select ng-model="filterStatus" 
                 ng-options="status for status in statusList" 
@@ -8,26 +8,36 @@
                 class="form-control">
             <option value="">All</option>
         </select>
-        {{filterStatus}}
-	</div>
-    <div class="col-lg-3 form-group" ng-hide="hideAffected">
-    	<label>Affected to : </label>
-        <select ng-model="filterMember" 
-                ng-options="member.user.id as member.user.username for member in allMembers"
-                ng-change="changeFilterMember()"
-                class="form-control">
-            <option value="">All</option>
-            <!-- <option value="">Not affected</option> -->
-        </select>
-	</div>
-	<div class="col-lg-4 form-group">
-		<label>Search task : </label>
+        &nbsp;&nbsp;&nbsp;
+        <span ng-hide="hideAffected">
+	    	<label>Affected to : </label>
+	        <select ng-model="filterMember" 
+	                ng-options="member.user.id as member.user.username for member in allMembers"
+	                ng-change="changeFilterMember()"
+	                class="form-control">
+	            <option value="">All</option>
+	            <!-- <option value="">Not affected</option> -->
+	        </select>
+		</span>
+	<!-- </div> -->
+    &nbsp;&nbsp;&nbsp;
+	<!-- <div class="col-lg-3 form-group"> -->
+		<label>Tag : </label>
+    	<div class="input-group">
+	      	<input type="text" class="form-control" ng-model="filterTag" ng-change="changeFilterTag()">
+	      	<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+	    </div>
+	<!-- </div> -->
+	&nbsp;&nbsp;&nbsp;
+	<!-- <div class="col-lg-4 form-group"> -->
+		<label>Title : </label>
     	<div class="input-group">
 	      	<input type="text" class="form-control" ng-model="searchTask">
 	      	<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
 	    </div>
-	</div>
-	<div class="col-lg-2">
+	<!-- </div> -->
+	&nbsp;&nbsp;&nbsp;
+	<!-- <div class="col-lg-1"> -->
 		<div class="pull-right">
 			<button ng-click="clearFilter()" type="button" class="btn btn-default">
 			  	Clear
@@ -36,5 +46,5 @@
 			  	<span class="glyphicon glyphicon-remove"></span>
 			</button>
 		</div>
-	</div>
+	<!-- </div> -->
 </div>

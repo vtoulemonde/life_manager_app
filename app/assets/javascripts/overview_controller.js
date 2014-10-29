@@ -4,10 +4,12 @@ projectApp.controller("OverviewController", ["$scope", "Restangular", function($
     $scope.hideAffected=true;
     $scope.filterStatus = undefined;
     $scope.searchTask = undefined;
+    $scope.filterTag = undefined;
 
     $scope.clearFilter = function(){
         $scope.filterStatus = undefined;
         $scope.searchTask = undefined;
+        $scope.filterTag = undefined;
     };
 
     $scope.toggleDisplayFilter = function(){
@@ -27,6 +29,12 @@ projectApp.controller("OverviewController", ["$scope", "Restangular", function($
     $scope.changeFilterStatus = function(){
         if ($scope.filterStatus === null){
             $scope.filterStatus = undefined;
+        }
+    };
+
+    $scope.changeFilterTag = function(){
+        if ($scope.filterTag === ""){
+            $scope.filterTag = undefined;
         }
     };
 

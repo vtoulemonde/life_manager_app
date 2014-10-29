@@ -15,7 +15,7 @@
 		<!-- The dnd-list directive allows to drop elements into it.
 		     The dropped data will be added to the referenced list -->
 		<ul dnd-list="list.tasks" class="list-group">
-		    <li ng-repeat="task in list.tasks | filter:{status:filterStatus, user_id:filterMember, title:searchTask}:false"
+		    <li ng-repeat="task in list.tasks | filter:{status:filterStatus, user_id:filterMember, title:searchTask, tag:filterTag}:false"
 		        dnd-draggable="task"
 		        dnd-moved="moveTask(task, list, $index)"
 		        dnd-effect-allowed="move" 

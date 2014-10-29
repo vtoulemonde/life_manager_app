@@ -39,25 +39,24 @@ projectApp.controller("ListController", ["$scope","Restangular", function($scope
         });
     };
 
-    $scope.toggleDisplayFilter = function(){
-    	if($scope.showFilter){
-			$scope.showFilter = false;
-    	} else {
-    		$scope.showFilter = true;
-    	}
-    };
-
-    $scope.closeFilter = function(){
-        $scope.filterStatus = undefined;
-        $scope.filterMember = undefined;
-        $scope.searchTask = undefined;
-        $scope.showFilter = false;
-    };
-
     $scope.clearFilter = function(){
         $scope.filterStatus = undefined;
         $scope.filterMember = undefined;
+        $scope.filterTag = undefined;
         $scope.searchTask = undefined;
+    };
+
+    $scope.closeFilter = function(){
+        $scope.clearFilter();
+        $scope.showFilter = false;
+    };
+
+    $scope.toggleDisplayFilter = function(){
+        if($scope.showFilter){
+            $scope.closeFilter();
+        } else {
+            $scope.showFilter = true;
+        }
     };
 
     $scope.changeFilterStatus = function(){
@@ -69,6 +68,12 @@ projectApp.controller("ListController", ["$scope","Restangular", function($scope
     $scope.changeFilterMember = function(){
         if ($scope.filterMember === null){
             $scope.filterMember = undefined;
+        }
+    };
+
+    $scope.changeFilterTag = function(){
+        if ($scope.filterTag === ""){
+            $scope.filterTag = undefined;
         }
     };
 
