@@ -69,3 +69,7 @@ ul[dnd-list], ul[dnd-list] > li {
     background-color: #dff0d8;
     color: #3c763d;
 }
+
+.custom-last-item {
+    margin-bottom: 0px !important; 
+}
