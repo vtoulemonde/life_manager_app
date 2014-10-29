@@ -8,11 +8,19 @@ class ApplicationController < ActionController::Base
 	end
 
 	# This allows us to invoke the current_user() method in views!
-	helper_method :current_user, :logged_in?
+	helper_method :current_user, :logged_in?, :get_current_user_id
 
 	def current_user
 	    if session[:current_user_id]
 	        User.find session[:current_user_id]
+	    else
+	        nil
+	    end
+	end
+
+	def get_current_user_id
+	    if session[:current_user_id]
+	        session[:current_user_id]
 	    else
 	        nil
 	    end

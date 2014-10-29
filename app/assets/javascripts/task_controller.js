@@ -82,9 +82,7 @@ projectApp.controller("TaskController", ["$scope","Restangular", "$modal", funct
 
 
 projectApp.controller('ModalEditTaskCtrl', function ($scope, $modalInstance) {
-
-  
-
+    
   $scope.ok = function () {
     $modalInstance.close($scope.editTask);
   };

@@ -33,9 +33,12 @@
               <li><a href="#" ng-click="displayOverview()">My tasks</a></li>
 	          </ul>
 	          <ul class="nav navbar-nav navbar-right">
-	            <li><a href="/about">About</a></li>
-	            <li><%= link_to "Profile", edit_user_path(current_user) %></li>
-	            <li class="active"><%= link_to 'Logout', sessions_path, method: :delete %></li>
+	            <!-- <li><a href="/about">About</a></li> -->
+	            <!-- <li><%= link_to "Profile", edit_user_path(current_user) %></li> -->
+	            <li class="active">
+                  <!-- <%= link_to 'Logout', sessions_path, method: :delete %> -->
+                  <a data-method="delete" href="/sessions" rel="nofollow">Logout <span class="glyphicon glyphicon-log-out"></span></a>
+              </li>
 	          </ul>
           <% end %>
         </div><!--/.nav-collapse -->

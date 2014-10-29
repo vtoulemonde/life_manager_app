@@ -57,7 +57,6 @@ projectApp.controller("ListController", ["$scope","Restangular", function($scope
         $scope.filterStatus = undefined;
         $scope.filterMember = undefined;
         $scope.searchTask = undefined;
-
     };
 
 }]);

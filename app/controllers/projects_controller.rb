@@ -11,11 +11,11 @@ class ProjectsController < ApplicationController
 
 	def create
 		project = Project.new project_params
-		project.user_id = current_user.id
+		project.user_id = get_current_user_id
 		if project.save
 			# Create a default member with the current user
 			member = Member.new
-			member.user_id = current_user.id
+			member.user_id = get_current_user_id
 			member.project_id = project.id
 			member.save
 			render json: project
