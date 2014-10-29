@@ -81,7 +81,7 @@ projectApp.controller("TaskController", ["$scope","Restangular", "$modal", funct
 }]);
 
 
-projectApp.controller('ModalEditTaskCtrl', function ($scope, $modalInstance) {
+projectApp.controller('ModalEditTaskCtrl', ["$scope", "$modalInstance", function ($scope, $modalInstance) {
     
   $scope.ok = function () {
     $modalInstance.close($scope.editTask);
@@ -90,4 +90,4 @@ projectApp.controller('ModalEditTaskCtrl', function ($scope, $modalInstance) {
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
-});
+}]);

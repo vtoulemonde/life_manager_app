@@ -1,5 +1,10 @@
-<div class="row">
-	<h1>All tasks affected to me</h1>
+<div class="row" ng-controller="OverviewController">
+	<h1>All tasks affected to me 
+		<button ng-click="toggleDisplayFilter()" type="button" class="btn btn-default">
+		  	<span class="glyphicon glyphicon-filter"></span>
+		</button>
+	</h1>
+	<%= render partial: "/lists/filter_form" %>
 	<div class="col-md-3" ng-repeat="project in projectsOverview">
 		<div class="panel panel-info">
 		  	<!-- Project Title -->
@@ -12,13 +17,13 @@
 				<a class="list-group-item disabled">{{list.title}}</a>
 				<a href="#" 
 					class="list-group-item" 
-					ng-repeat="task in list.tasks" 
+					ng-repeat="task in list.tasks | filter:{status:filterStatus, title:searchTask}:false" 
 					ng-init="task.detail = false" 
 					ng-click="task.detail = !task.detail">
-						{{task.title}}
-						<div ng-show="task.detail" class="text-info">
-							<small><em>{{task.status}}</em></small><br>
-							<small><em>{{task.description}}</em></small>
+						{{task.title}}<br>
+						<small class="text-info"><em>{{task.status}}</em></small>
+						<div ng-show="task.detail" class="text-muted">
+							<small><em>Desc: {{task.description}}</em></small>
 						</div>
 				</a>
 			</div>

@@ -4,17 +4,20 @@
 		<label>Status : </label>
 		<select ng-model="filterStatus" 
                 ng-options="status for status in statusList" 
+                ng-change="changeFilterStatus()"
                 class="form-control">
             <option value="">All</option>
         </select>
+        {{filterStatus}}
 	</div>
-    <div class="col-lg-3 form-group">
+    <div class="col-lg-3 form-group" ng-hide="hideAffected">
     	<label>Affected to : </label>
         <select ng-model="filterMember" 
                 ng-options="member.user.id as member.user.username for member in allMembers"
+                ng-change="changeFilterMember()"
                 class="form-control">
             <option value="">All</option>
-            <option value="">Not affected</option>
+            <!-- <option value="">Not affected</option> -->
         </select>
 	</div>
 	<div class="col-lg-4 form-group">
@@ -29,7 +32,7 @@
 			<button ng-click="clearFilter()" type="button" class="btn btn-default">
 			  	Clear
 			</button>
-			<button ng-click="hideFilter()" type="button" class="btn btn-default">
+			<button ng-click="closeFilter()" type="button" class="btn btn-default">
 			  	<span class="glyphicon glyphicon-remove"></span>
 			</button>
 		</div>

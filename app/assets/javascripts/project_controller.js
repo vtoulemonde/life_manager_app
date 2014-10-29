@@ -108,7 +108,7 @@ projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", fu
 
 }]);
 
-projectApp.controller('ModalEditProjectCtrl', function ($scope, $modalInstance, project) {
+projectApp.controller('ModalEditProjectCtrl', ["$scope", "$modalInstance", "project", function ($scope, $modalInstance, project) {
 
   $scope.editProject = project;
 
@@ -119,9 +119,9 @@ projectApp.controller('ModalEditProjectCtrl', function ($scope, $modalInstance, 
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
-});
+}]);
 
-projectApp.controller('ModalAddMemberCtrl', function ($scope, $modalInstance, Restangular) {
+projectApp.controller('ModalAddMemberCtrl', ["$scope", "$modalInstance", "Restangular", function ($scope, $modalInstance, Restangular) {
     
     Restangular.all('users').getList().then(function(result){
       $scope.users = result;
@@ -161,4 +161,4 @@ projectApp.controller('ModalAddMemberCtrl', function ($scope, $modalInstance, Re
     $scope.ok = function () {
         $modalInstance.close();
     };
-});
+}]);

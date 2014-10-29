@@ -2,7 +2,8 @@
 projectApp.controller("ListController", ["$scope","Restangular", function($scope, Restangular) {
 
     $scope.showFormNewList = undefined;
-    $scope.newList = "";    $scope.showFilter = false;
+    $scope.newList = "";    
+    $scope.showFilter = false;
 
     $scope.addList = function(){
         $scope.showFormNewList = true;
@@ -46,7 +47,7 @@ projectApp.controller("ListController", ["$scope","Restangular", function($scope
     	}
     };
 
-    $scope.hideFilter = function(){
+    $scope.closeFilter = function(){
         $scope.filterStatus = undefined;
         $scope.filterMember = undefined;
         $scope.searchTask = undefined;
@@ -57,6 +58,18 @@ projectApp.controller("ListController", ["$scope","Restangular", function($scope
         $scope.filterStatus = undefined;
         $scope.filterMember = undefined;
         $scope.searchTask = undefined;
+    };
+
+    $scope.changeFilterStatus = function(){
+        if ($scope.filterStatus === null){
+            $scope.filterStatus = undefined;
+        }
+    };
+
+    $scope.changeFilterMember = function(){
+        if ($scope.filterMember === null){
+            $scope.filterMember = undefined;
+        }
     };
 
 }]);
