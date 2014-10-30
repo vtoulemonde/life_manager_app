@@ -11,10 +11,10 @@
 <body ng-app="projectApp" ng-controller="ProjectController">
 
     <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top custom" role="navigation">
+    <div class="navbar navbar-inverse navbar-fixed-top custom" role="navigation">
       <div class="container">
         <div class="navbar-header">
-        	<a href="#" class="navbar-brand">Life Manager</a>
+        	<a class="navbar-brand nav-custom">Life Manager</a>
         </div>
         <div class="navbar-collapse collapse">
           <% if logged_in? %>
@@ -33,7 +33,7 @@
               <li><a href="#" ng-click="displayOverview()">My tasks</a></li>
 	          </ul>
 	          <ul class="nav navbar-nav navbar-right">
-              <li><a><%= current_user.username.capitalize%>'s account</a></li>
+              <li><a class="nav-custom"><%= current_user.username.capitalize%>'s account</a></li>
 	            <li class="active">
                   <!-- <%= link_to 'Logout', sessions_path, method: :delete %> -->
                   <a data-method="delete" href="/sessions" rel="nofollow">Logout <span class="glyphicon glyphicon-log-out"></span></a>
