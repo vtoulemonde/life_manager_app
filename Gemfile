@@ -41,6 +41,9 @@ gem 'autoprefixer-rails'
 # Use rspec
 gem 'rspec-rails'
 
+# Use to sen email with mailgun
+gem "typhoeus"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

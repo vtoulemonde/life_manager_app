@@ -1,4 +1,6 @@
 class MembersController < ApplicationController
+	include MembersHelper
+
 	def index
         members = Member.where(project_id: params[:project_id])
 		render json: members.to_json(include: :user)
@@ -7,6 +9,7 @@ class MembersController < ApplicationController
     def create
 		member = Member.new member_param
 		if member.save
+			sendEmail(member)
 			render json: member.to_json(include: :user)
 		else
 			render json: {}
