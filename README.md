@@ -22,7 +22,7 @@ https://calm-beach-3737.herokuapp.com/
 
 ## Trello/Pivotal URL
 
-(to define)
+https://trello.com/b/uSfpiu0L/project3-task-manager
 
 ## Deployment instructions
 
@@ -35,6 +35,10 @@ Install the database by running:
 rake db:create db:migrate
 rake db:seed (to have some seed data)
 ```
+Create environment variables (in a file called `local_env.yml` in the config folder for example):
+* MAILGUN_DOMAIN (domain of your account on MailGun)
+* MAILGUN_API_KEY (API key of your account on MailGun)
+
 Run the server with:
 ```
 rails s
