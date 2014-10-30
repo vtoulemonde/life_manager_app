@@ -1,25 +1,39 @@
+<script type="text/javascript">
+var ngCurrentUser = <%=raw current_user.to_json%>;
+</script>
+
 <div ng-show="project_display !== undefined" ng-controller="ListController" >
 	<h1>{{project_display.title}} 
 		<button ng-click="addList()" type="button" class="btn btn-default">
 		  	<span class="glyphicon glyphicon-plus"></span> Add list
 		</button>
 		<div class="btn-group">
-			<button ng-click="openEditProject('sm')" type="button" class="btn btn-default">
+			<button ng-click="openEditProject('sm')" type="button" class="btn btn-default" ng-show="isMyProject">
 			  	<span class="glyphicon glyphicon-pencil"></span>
 			</button>
-			<button ng-click="openAddMember('sm')" type="button" class="btn btn-default">
+			<button ng-click="openAddMember('sm')" type="button" class="btn btn-default" ng-show="isMyProject">
 			  	<span class="glyphicon glyphicon-user"></span>
 			</button>
 			<button ng-confirm-click="Are you sure you want to delete project? All lists and tasks of the project will be deleted." 
 					ng-click="deleteProject()" 
 					type="button" 
-					class="btn btn-default">
+					class="btn btn-default"
+					ng-show="isMyProject">
 			  	<span class="glyphicon glyphicon-remove"></span>
 			</button>
+		</div>
+		<div class="btn-group">
 			<button ng-click="toggleDisplayFilter()" type="button" class="btn btn-default">
 			  	<span class="glyphicon glyphicon-filter"></span>
 			</button>
+			<button ng-click="showDetailedView()" type="button" class="btn btn-default" ng-hide="detailedView">
+			  	<span class="glyphicon glyphicon-zoom-in"></span>
+			</button>
+			<button ng-click="hideDetailedView()" type="button" class="btn btn-default" ng-show="detailedView">
+			  	<span class="glyphicon glyphicon-zoom-out"></span>
+			</button>
 		</div>
+		<small class="text-muted" ng-hide="isMyProject"><em>({{project_display.user.username}}'s project)</em></small>
 	</h1>
 	<%= render partial: "/lists/filter_form" %>
 	

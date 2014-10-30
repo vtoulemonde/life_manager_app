@@ -5,7 +5,8 @@
 				<button  ng-confirm-click="Are you sure you want to delete that list? All tasks will be deleted."
 			  			ng-click="deleteList(list)" 
 			  			type="button" 
-			  			class="btn btn-default btn-xs">
+			  			class="btn btn-default btn-xs"
+			  			ng-show="isMyProject">
 			  		<span class="glyphicon glyphicon-remove"></span>
 				</button>
 			</div>
@@ -30,6 +31,11 @@
 				  	<span class="glyphicon glyphicon-remove"></span>
 				  </button>
 				</div>
+				<span ng-show="detailedView">
+					
+					<br><small class="text-info"><em>{{task.status}}</em></small>
+					<br><small class="text-muted"><em>{{task.description}}</em></small><span class="badge pull-right">{{task.tag}}</span>
+				</span>
 		    </li>
 		    <li ng-show="showForm === list.id" class="list-group-item">
 		    	<form ng-submit="createNewTask(list)">

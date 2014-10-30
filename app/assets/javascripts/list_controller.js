@@ -4,6 +4,7 @@ projectApp.controller("ListController", ["$scope","Restangular", function($scope
     $scope.showFormNewList = undefined;
     $scope.newList = "";    
     $scope.showFilter = false;
+    $scope.detailedView = false;
 
     $scope.addList = function(){
         $scope.showFormNewList = true;
@@ -76,5 +77,14 @@ projectApp.controller("ListController", ["$scope","Restangular", function($scope
             $scope.filterTag = undefined;
         }
     };
+
+    $scope.showDetailedView = function(){
+        $scope.detailedView = true;
+    };
+
+    $scope.hideDetailedView = function(){
+        $scope.detailedView = false;
+    };
+
 
 }]);

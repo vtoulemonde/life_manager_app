@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>LifemanagerApp</title>
+  <title>LifeManagerApp</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -33,8 +33,6 @@
               <li><a href="#" ng-click="displayOverview()">My tasks</a></li>
 	          </ul>
 	          <ul class="nav navbar-nav navbar-right">
-	            <!-- <li><a href="/about">About</a></li> -->
-	            <!-- <li><%= link_to "Profile", edit_user_path(current_user) %></li> -->
               <li><a><%= current_user.username.capitalize%>'s account</a></li>
 	            <li class="active">
                   <!-- <%= link_to 'Logout', sessions_path, method: :delete %> -->

@@ -8,12 +8,16 @@ projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", fu
     $scope.newProject = {title: ""};
     $scope.statusList = ['New', 'To start', 'In progress', 'Pending', 'Done'];
     $scope.showOverviewPage = false;
+    $scope.isMyProject = false;
+    $scope.currentUser = ngCurrentUser;
+
 
     $scope.selectProject = function(project){
         $scope.showOverviewPage = false;
         $scope.project_display = project;
         $scope.allLists = $scope.project_display.getList('lists').$object;
         $scope.allMembers = $scope.project_display.getList('members').$object;
+        $scope.isMyProject = ($scope.currentUser.id === $scope.project_display.user_id);
     };
 
     Restangular.all('projects').getList().then(function(result) { 

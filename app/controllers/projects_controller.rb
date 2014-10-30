@@ -2,8 +2,22 @@ class ProjectsController < ApplicationController
 
 	def index
 		if current_user
-			projects = current_user.projects
-			render json: projects
+			# my_projects = current_user.projects
+			# Get the project I am a member
+			# tasks = Task.where(user_id: get_current_user_id)
+			# lists = tasks.map{ |t| t.list}
+			# lists.uniq!
+			# projects_member = lists.map{ |l| l.projects_member}
+			# projects_member.uniq!
+			projects_member = current_user.projects_member
+			# puts "My Projects"
+			# puts my_projects
+			# puts "Project member"
+			# puts projects_member
+			# puts "Project conscat"
+			# my_projects.concat(projects_member)
+			# puts my_projects
+			render json: projects_member.to_json(include: :user)
 		else 
 			render json: []
 		end
