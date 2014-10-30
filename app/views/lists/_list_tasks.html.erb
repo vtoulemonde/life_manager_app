@@ -32,9 +32,8 @@
 				  </button>
 				</div>
 				<span ng-show="detailedView">
-					
-					<br><small class="text-info"><em>{{task.status}}</em></small>
-					<br><small class="text-muted"><em>{{task.description}}</em></small><span class="badge pull-right">{{task.tag}}</span>
+					<br><small class="text-info"><em>{{task.status}}</em></small>&nbsp;&nbsp;<span class="badge badge-custom">{{task.tag}}</span>
+					<br><small class="text-muted"><em>{{task.description}}</em></small>
 				</span>
 		    </li>
 		    <li ng-show="showForm === list.id" class="list-group-item">

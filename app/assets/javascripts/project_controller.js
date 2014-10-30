@@ -10,6 +10,7 @@ projectApp.controller("ProjectController", ["$scope","Restangular", "$modal", fu
     $scope.showOverviewPage = false;
     $scope.isMyProject = false;
     $scope.currentUser = ngCurrentUser;
+    console.log(ngCurrentUser);
 
 
     $scope.selectProject = function(project){
